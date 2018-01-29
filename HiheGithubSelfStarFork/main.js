@@ -17,7 +17,7 @@ var inline_src = (<><![CDATA[
     init(document.querySelector('meta[name="user-login"]').getAttribute("content"));
     /* jshint ignore:start */
 ]]></>).toString();
-                  var c = Babel.transform(inline_src, { presets: [ "es2015", "es2016" ] });
+var c = Babel.transform(inline_src, { presets: [ "es2015", "es2016" ] });
 eval(c.code);
 /* jshint ignore:end */
 
