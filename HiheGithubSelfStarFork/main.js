@@ -36,7 +36,7 @@ function init(user){
 
     var focks = document.querySelectorAll('.fork');
     for (var fock of focks){
-        var focklink = getElementByXpath(fock, "div/div/div/div/a[3]");
+        var focklink = getElementByXpath(fock, "div/div/div/div/div/div/a[3]");
         if (focklink!==null){
             if (focklink.href.startsWith('https://github.com/'+user)){
                 fock.style.display = 'none';
