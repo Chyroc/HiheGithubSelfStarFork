@@ -1,11 +1,9 @@
 // ==UserScript==
 // @name         HiheGithubSelfStarFork
-// @namespace    https://github.com/Chyroc/HiheGithubSelfStarFork
+// @namespace    https://github.com/Chyroc/tampermonkey-script
 // @version      0.1.3
-// @description  shows how to use babel compiler
+// @description  hidden star and fork of self repo
 // @author       Chyroc
-// @require      https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.18.2/babel.js
-// @require      https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.16.0/polyfill.js
 // @require      https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js
 // @match        https://github.com
 // ==/UserScript==
