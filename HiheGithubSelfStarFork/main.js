@@ -1,52 +1,40 @@
 // ==UserScript==
 // @name         HiheGithubSelfStarFork
 // @namespace    https://github.com/Chyroc/HiheGithubSelfStarFork
-// @version      0.1.2
+// @version      0.1.3
 // @description  shows how to use babel compiler
 // @author       Chyroc
 // @require      https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.18.2/babel.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.16.0/polyfill.js
+// @require      https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js
 // @match        https://github.com
 // ==/UserScript==
-
-/* jshint ignore:start */
-var inline_src = (<><![CDATA[
-    /* jshint ignore:end */
-    /* jshint esnext: false */
-    /* jshint esversion: 6 */
-    init(document.querySelector('meta[name="user-login"]').getAttribute("content"));
-    /* jshint ignore:start */
-]]></>).toString();
-var c = Babel.transform(inline_src, { presets: [ "es2015", "es2016" ] });
-eval(c.code);
-/* jshint ignore:end */
 
 function getElementByXpath(d, path) {
     return document.evaluate(path, d, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 }
 
-function init(user){
-    var stars = document.querySelectorAll('.watch_started');
-    for (var star of stars){
-        var starlink = getElementByXpath(star, "div/div/div/div[2]/div/span/a").href;
-        if (starlink.startsWith('https://github.com/'+user)){
-            star.style.display = 'none';
-        }
-    }
+$(document).ready(function() {
+    setTimeout(function(){
+        var user = document.querySelector('meta[name="user-login"]').getAttribute("content")
 
-    var focks = document.querySelectorAll('.fork');
-    for (var fock of focks){
-        var focklink = getElementByXpath(fock, "div/div/div/div/div/div/a[3]");
-        if (focklink!==null){
-            if (focklink.href.startsWith('https://github.com/'+user)){
-                fock.style.display = 'none';
+        var stars = document.querySelectorAll('#dashboard > div.news.column.two-thirds > div.watch_started');
+        for (var star of stars){
+            var h = getElementByXpath(star, "div/div/div/div/div[1]/div/a[2]")
+            if (h !== null){
+                if (h.href.startsWith('https://github.com/'+user)){
+                    star.style.display = 'none';
+                    console.log('hidden',h.href);
+                }
             }
         }
-    }
 
-    document.querySelector(".ajax-pagination-btn").addEventListener("click", function() {
-        setTimeout(() => {
-            init(user);
-        }, 1500);
-    });
-}
+        var forks = document.querySelectorAll('#dashboard > div.news.column.two-thirds > div.fork');
+        for (var fork of forks){
+            var f = getElementByXpath(star, "div/div/div/div/div[1]/div/a[2]")
+            if (f !== null){
+                console.log('f',f)
+            }
+        }
+    }, 3000);
+});
